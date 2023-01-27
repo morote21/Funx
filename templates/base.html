@@ -1,0 +1,90 @@
+{# templates/base.html #}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>{{ title }}</title>
+
+</head>
+
+<style>
+
+    .interpret {
+        display: flex;
+        width: 99vw;
+        height: 99vh;
+        position: absolute;
+    }
+
+    .left {
+        background-color: lightgray;
+        width: 50vw;
+        height: 99vh;
+        font-size: 20px;
+    }
+
+    .funcions {
+        background-color: lightgray;
+        height: 49vh;
+        overflow-y: scroll;
+    }
+
+    .consola {
+        background-color: lightgray;
+        max-height: 50vh;
+        overflow: scroll;
+    }
+
+    .right {
+        background-color: lightblue;
+        width: 50vw;
+        height: 99vh;
+        font-size: 20px;
+        overflow: scroll;
+    }
+
+    textarea {
+        resize: none;
+        height: 35vh;
+        width: 45vw;
+        font-size: 30px;
+    }
+
+</style>
+
+
+<body>
+    <div class="interpret">
+        <div class="left">
+            <div class="funcions">
+                <h1 style = "color:darkorange; margin-left: 10px;"> Funcions </h1>
+                {% for function in functions %}
+                    <h3 style = "margin-left: 20px;"> · {{ function }} </h3>
+                {% endfor %}
+            </div>
+            <div class="consola">
+                <h1 style = "color:deepskyblue; margin-left: 10px;"> Consola </h1>	
+                <form style = "margin-left: 10px;" action = "http://localhost:5000/" method = "POST">
+                    <p> <textarea wrap = "off" name = "input" value = "" ></textarea> </p>
+                    <p> <input type = "submit" value = "submit" /> </p>
+                </form>
+            </div>
+        </div>
+        
+        <div class="right">
+            <h1 style = "color:limegreen; margin-left: 10px;"> Resultats </h1>
+            {% for result in results %}
+            <h2 style = "margin-left: 10px;"> In {{ result.it }}: {{ result.input }} </h2>
+            <h2 style = "margin-left: 10px;"> Out {{ result.it }}: {{ result.output }} </h2>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
